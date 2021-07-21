@@ -71,6 +71,54 @@ else
 fi
 
 
+wait 
+
+
+# -- add the overdrive and pci scripts to miner directory --
+highlight "Inject overdrive.sh into miner directory ..."
+echo '#!/bin/bash
+
+# -- WALLET --
+declare wallet="YOUR WALLET ADDRESS HERE"
+declare workerName="rig"
+
+# These environment variables should be set for the driver to allow max mem allocation from the gpu(s).
+function gpu () {​​​​​​​
+cd `dirname $0`
+C=`./card_from_pci.sh $1`
+C=`echo $C | xargs`
+echo "manual" > /sys/class/drm/card$C/device/power_dpm_force_performance_level
+echo "s 1 1600" > /sys/class/drm/card$C/device/pp_od_clk_voltage
+echo "m 1 1000" > /sys/class/drm/card$C/device/pp_od_clk_voltage
+echo "vc 2 1600 900" > /sys/class/drm/card$C/device/pp_od_clk_voltage
+echo "c" > /sys/class/drm/card$C/device/pp_od_clk_voltage
+cat /sys/class/drm/card$C/device/pp_od_clk_voltage
+}​​​​​​​
+gpu "03" & gpu "06" & gpu "09" & gpu "0c" & gpu "0f" & gpu "13" & gpu "16" & gpu "19" & gpu "1c" & gpu "1f" & gpu "22" & gpu "25" &&
+
+wait
+./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x"' >> $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh &&
+highlight "Inject overdrive.sh into miner directory ..."
+echo '#!/bin/bash
+cd `dirname $0`
+if [ $# -ne 1 ]
+then
+    echo "Usage $0: <pci bus id>"
+    exit 1
+fi
+BUSID=$1
+P=`egrep PCI_SLOT_NAME /sys/class/drm/card*/device/uevent | egrep "$BUSID"`
+if [ -z "$P" ]
+then
+    echo "Error: no device found for bus id $BUSID, exiting."
+    exit 1
+fi
+DEVDIR=`dirname $P`
+CARD=`echo $DEVDIR | cut -f 5 -d / | sed "s/[^0-9]//g"`
+    echo $CARD
+exit 0' >> $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh &&
+
+
 wait
 
 
