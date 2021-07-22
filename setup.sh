@@ -83,7 +83,7 @@ declare wallet="YOUR WALLET ADDRESS HERE"
 declare workerName="rig"
 
 # These environment variables should be set for the driver to allow max mem allocation from the gpu(s).
-function gpu () {​​​​​​​
+function gpu () {
 cd `dirname $0`
 C=`./card_from_pci.sh $1`
 C=`echo $C | xargs`
@@ -93,11 +93,11 @@ echo "m 1 1000" > /sys/class/drm/card$C/device/pp_od_clk_voltage
 echo "vc 2 1600 900" > /sys/class/drm/card$C/device/pp_od_clk_voltage
 echo "c" > /sys/class/drm/card$C/device/pp_od_clk_voltage
 cat /sys/class/drm/card$C/device/pp_od_clk_voltage
-}​​​​​​​
+}
 gpu "03" & gpu "06" & gpu "09" & gpu "0c" & gpu "0f" & gpu "13" & gpu "16" & gpu "19" & gpu "1c" & gpu "1f" & gpu "22" & gpu "25" &&
 
 wait
-./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x"' >> $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh &&
+./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x' >> $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh &&
 highlight "Inject overdrive.sh into miner directory ..."
 echo '#!/bin/bash
 cd `dirname $0`
