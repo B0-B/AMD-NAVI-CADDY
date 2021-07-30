@@ -75,7 +75,7 @@ wait
 
 
 # -- add the overdrive and pci scripts to miner directory --
-highlight "Inject overdrive.sh into miner directory ..."
+highlight "Inject $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh ..."
 echo '#!/bin/bash
 
 # -- WALLET --
@@ -98,7 +98,7 @@ gpu "03" & gpu "06" & gpu "09" & gpu "0c" & gpu "0f" & gpu "13" & gpu "16" & gpu
 
 wait
 ./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x' >> $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh &&
-highlight "Inject overdrive.sh into miner directory ..."
+highlight "Inject $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh ..."
 echo '#!/bin/bash
 cd `dirname $0`
 if [ $# -ne 1 ]
@@ -116,6 +116,7 @@ CARD=`echo $DEVDIR | cut -f 5 -d / | sed "s/[^0-9]//g"`
     echo $CARD
 ' >> $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
 # and finally make both scripts executable
+highlight "Make both .sh files executable ..."
 sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
 sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh
 
