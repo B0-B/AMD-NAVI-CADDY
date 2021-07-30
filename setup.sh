@@ -125,8 +125,7 @@ wait
 
 
 # -- output ssh info --
-ip=$(hostname -i)
-highlight "SSH: Machine will be accessable under $usr@$ip"
+highlight "SSH: Machine will be accessable under $usr@$(hostname)"
 
 
 # -- final reboot --
