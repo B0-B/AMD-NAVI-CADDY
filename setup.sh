@@ -115,6 +115,9 @@ DEVDIR=`dirname $P`
 CARD=`echo $DEVDIR | cut -f 5 -d / | sed "s/[^0-9]//g"`
     echo $CARD
 ' >> $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
+# and finally make both scripts executable
+sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
+sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh
 
 
 wait
