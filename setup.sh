@@ -115,11 +115,15 @@ DEVDIR=`dirname $P`
 CARD=`echo $DEVDIR | cut -f 5 -d / | sed "s/[^0-9]//g"`
     echo $CARD
 ' >> $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
+highlight "Inject $dir/miner/teamredminer-v0.8.3-linux/detatch.sh ..."
+echo '#!/bin/bash
+setsid -f bash overdrive.sh > /dev/null 2>&1
+echo "Team Red Miner will start soon ..."' >> $dir/miner/teamredminer-v0.8.3-linux/detatch.sh
 # and finally make both scripts executable
 highlight "Make both .sh files executable ..."
 sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
 sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh
-
+sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/detatch.sh
 
 wait
 
