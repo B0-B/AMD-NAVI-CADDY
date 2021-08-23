@@ -43,8 +43,6 @@ To find these use the `card_from_pci.sh` script in the same directory, by trying
 /bin/bash card_from_pci.sh "2"
 ERROR ... # no card found at slot 2!
 ```
-Then open 
-
 
 
 Once all cards are found please override the gpu call in overdrive.sh
