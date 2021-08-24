@@ -1,7 +1,8 @@
 <h1 align=center><strong>AMD</strong> NAVI MULTI GPU SETUP [LINUX]</h1>
 
 # Prerequisites
-Ubuntu 20.04.2 (Desktop LTS) and no updates (apt-get update)
+Ubuntu 20.04.2 (Desktop LTS) and no updates (apt-get update) [TESTED]
+Ubuntu 18.04 [NOT TESTED]
 
 # Dependencies
 - AMD 20.40 Driver
