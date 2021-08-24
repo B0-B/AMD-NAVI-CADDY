@@ -26,24 +26,53 @@ sudo update-grub # final reboot at the end of script
 wait
 
 
-# -- check for driver install --
-if [ -d "$dir/driver" ]; then
-	highlight "Driver directory was found at $dir/driver"
+# -- decide which OS to use & install drivers --
+version=$(lsb_release -d | awk -F"\t" '{print $2}')
+if [[ *"Ubuntu 18"* == $version ]];then
+    highlight "OS $version found!"
+	# -- check for driver install --
+	if [ -d "$dir/driver" ]; then
+		highlight "Driver directory was found at $dir/driver"
+	else
+		highlight "Installing drivers ..."
+		cd $dir && mkdir driver && cd driver/ # create driver directory and tab into it
+		wget https://drivers.amd.com/drivers/linux/amdgpu-pro-20.40-1147287-ubuntu-18.04.tar.xz --referer https://support.amd.com &&
+		tar -Jxvf amdgpu-pro-20.40-1147287-ubuntu-18.04.tar.xz && 
+		cd amdgpu-pro-20.40-1147287-ubuntu-18.04/ &&
+		sudo ./amdgpu-install -y --no-dkms --opencl=pal --headless &&
+		cd $dir/driver &&
+		wget https://drivers.amd.com/drivers/linux/amdgpu-pro-21.20-1274019-ubuntu-18.04.tar.xz --referer https://support.amd.com &&
+		tar -Jxvf amdgpu-pro-21.20-1274019-ubuntu-18.04.tar.xz &&
+		cd amdgpu-pro-21.20-1274019-ubuntu-18.04/ &&
+		sudo apt install ./amdgpu-dkms-firmware_5.11.5.26-1274019_all.deb ./amdgpu-dkms_5.11.5.26-1274019_all.deb -y &&
+		cd $dir/driver &&
+		sudo usermod -a -G video $usr && # set groups for ocl device recognition
+		sudo usermod -a -G render $usr
+	fi
+elif [[ $version == *"Ubuntu 20"* ]];then
+    highlight "OS $version found!"
+	# -- check for driver install --
+	if [ -d "$dir/driver" ]; then
+		highlight "Driver directory was found at $dir/driver"
+	else
+		highlight "Installing drivers ..."
+		cd $dir && mkdir driver && cd driver/ # create driver directory and tab into it
+		wget https://drivers.amd.com/drivers/linux/amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz --referer https://support.amd.com &&
+		tar -Jxvf amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz && 
+		cd amdgpu-pro-20.40-1147286-ubuntu-20.04/ &&
+		sudo ./amdgpu-install -y --no-dkms --opencl=pal --headless &&
+		cd $dir/driver &&
+		wget https://drivers.amd.com/drivers/linux/amdgpu-pro-21.20-1271047-ubuntu-20.04.tar.xz --referer https://support.amd.com &&
+		tar -Jxvf amdgpu-pro-21.20-1271047-ubuntu-20.04.tar.xz &&
+		cd amdgpu-pro-21.20-1271047-ubuntu-20.04/ &&
+		sudo apt install ./amdgpu-dkms-firmware_5.11.5.26-1271047_all.deb ./amdgpu-dkms_5.11.5.26-1271047_all.deb -y &&
+		cd $dir/driver &&
+		sudo usermod -a -G video $usr && # set groups for ocl device recognition
+		sudo usermod -a -G render $usr
+	fi
 else
-	highlight "Installing drivers ..."
-	cd $dir && mkdir driver && cd driver/ # create driver directory and tab into it
-	wget https://drivers.amd.com/drivers/linux/amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz --referer https://support.amd.com &&
-	tar -Jxvf amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz && 
-	cd amdgpu-pro-20.40-1147286-ubuntu-20.04/ &&
-	sudo ./amdgpu-install -y --no-dkms --opencl=pal --headless &&
-	cd $dir/driver &&
-	wget https://drivers.amd.com/drivers/linux/amdgpu-pro-21.20-1271047-ubuntu-20.04.tar.xz --referer https://support.amd.com &&
-	tar -Jxvf amdgpu-pro-21.20-1271047-ubuntu-20.04.tar.xz &&
-	cd amdgpu-pro-21.20-1271047-ubuntu-20.04/ &&
-	sudo apt install ./amdgpu-dkms-firmware_5.11.5.26-1271047_all.deb ./amdgpu-dkms_5.11.5.26-1271047_all.deb -y &&
-	cd $dir/driver &&
-	sudo usermod -a -G video $usr && # set groups for ocl device recognition
-	sudo usermod -a -G render $usr
+    highlight "$version not supported!"
+	return
 fi
 
 
