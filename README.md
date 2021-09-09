@@ -12,7 +12,7 @@ Ubuntu 18.04 [NOT TESTED]
 # Download
 Open a terminal anywhere and type
 ```bash
-~$ wget -O - https://b0-b.github.io/amd-driver/pull.sh | bash 
+~$ wget -O - https://b0-b.github.io/AMD-NAVI-1x-SETUP/pull.sh | bash 
 ```
 and hit enter. The `setup.sh` and `uninstall.sh` will be downloaded in the home directory.
 
