@@ -31,7 +31,7 @@ Please reboot your system.
 Go into the generated overdrive.sh script in the miner directory 
 
 ```bash
-cd $HOME/miner/teamredminer-v0.8.3-linux/
+cd $HOME/miner/teamredminer-v0.8.5-linux/
 ```
 
 When multiple GPUs are utilized on a single mainboard (MB), the MB dependend PCI IDs need to be determined to set MCLK and GFX voltages clocks correctly and allow maximum memory allocation (before mining workload).
