@@ -6,7 +6,7 @@ Ubuntu 18.04 [NOT TESTED]
 
 # Dependencies
 - AMD 20.40 Driver
-- Team Red Miner 0.8.4
+- Team Red Miner 0.8.5
 - no-dkms
 
 # Download

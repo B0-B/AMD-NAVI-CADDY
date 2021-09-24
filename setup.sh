@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function highlight () {
 	printf "\n\t\033[1;33m$1\033[1;35m\n"; sleep 1
 }
@@ -79,14 +78,6 @@ fi
 wait
 
 
-# -- install tools --
-highlight "Install tools ..."
-sudo apt install -y clinfo ssh 
-
-
-wait
-
-
 # -- check for miner install --
 if [ -d "$dir/miner" ]; then
 	highlight "Miner directory was found at $dir/miner"
@@ -104,13 +95,11 @@ wait
 
 
 # -- add the overdrive and pci scripts to miner directory --
-highlight "Inject $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh ..."
+highlight "Inject $dir/miner/teamredminer-v0.8.5-linux/overdrive.sh ..."
 echo '#!/bin/bash
-
 # -- WALLET --
 declare wallet="YOUR WALLET ADDRESS HERE"
 declare workerName="rig"
-
 # These environment variables should be set for the driver to allow max mem allocation from the gpu(s).
 function gpu () {
 cd `dirname $0`
@@ -124,10 +113,9 @@ echo "c" > /sys/class/drm/card$C/device/pp_od_clk_voltage
 cat /sys/class/drm/card$C/device/pp_od_clk_voltage
 }
 gpu "03" & gpu "06" & gpu "09" & gpu "0c" & gpu "0f" & gpu "13" & gpu "16" & gpu "19" & gpu "1c" & gpu "1f" & gpu "22" & gpu "25" &&
-
 wait
-./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x --eth_config=B' >> $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh &&
-highlight "Inject $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh ..."
+./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x --eth_config=B' >> $dir/miner/teamredminer-v0.8.5-linux/overdrive.sh &&
+highlight "Inject $dir/miner/teamredminer-v0.8.5-linux/card_from_pci.sh ..."
 echo '#!/bin/bash
 cd `dirname $0`
 if [ $# -ne 1 ]
@@ -143,16 +131,27 @@ fi
 DEVDIR=`dirname $P`
 CARD=`echo $DEVDIR | cut -f 5 -d / | sed "s/[^0-9]//g"`
     echo $CARD
-' >> $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
-highlight "Inject $dir/miner/teamredminer-v0.8.3-linux/detatch.sh ..."
+' >> $dir/miner/teamredminer-v0.8.5-linux/card_from_pci.sh
+highlight "Inject $dir/miner/teamredminer-v0.8.5-linux/detatch.sh ..."
 echo '#!/bin/bash
 setsid -f bash overdrive.sh > /dev/null 2>&1
-echo "Team Red Miner will start soon, you may close this shell now."' >> $dir/miner/teamredminer-v0.8.3-linux/detatch.sh
+echo "Team Red Miner will start soon, you may close this shell now."' >> $dir/miner/teamredminer-v0.8.5-linux/detatch.sh
 # and finally make both scripts executable
 highlight "Make both .sh files executable ..."
-sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/card_from_pci.sh
-sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/overdrive.sh
-sudo chmod +x $dir/miner/teamredminer-v0.8.3-linux/detatch.sh
+sudo chmod +x $dir/miner/teamredminer-v0.8.5-linux/card_from_pci.sh
+sudo chmod +x $dir/miner/teamredminer-v0.8.5-linux/overdrive.sh
+sudo chmod +x $dir/miner/teamredminer-v0.8.5-linux/detatch.sh
+highlight "done.\n"
+
+
+wait
+
+
+# -- install tools --
+highlight "Install tools ..."
+sudo apt install -y clinfo ssh &&
+highlight "done.\n"
+
 
 wait
 
