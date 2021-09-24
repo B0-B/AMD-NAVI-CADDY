@@ -85,8 +85,8 @@ else
 	highlight "Download Miner ..."
 	mkdir $dir/miner && 
 	cd $dir/miner &&
-	wget https://github.com/todxx/teamredminer/releases/download/v0.8.3/teamredminer-v0.8.3-linux.tgz --referer https://github.com &&
-	tar -xvf teamredminer-v0.8.3-linux.tgz &&
+	wget https://github.com/todxx/teamredminer/releases/download/v0.8.5/teamredminer-v0.8.5-linux.tgz --referer https://github.com &&
+	tar -xvf teamredminer-v0.8.5-linux.tgz &&
 	cd $dir
 fi
 
