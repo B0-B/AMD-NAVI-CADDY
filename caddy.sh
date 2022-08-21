@@ -5,12 +5,6 @@ function log () {
     printf "\033[1;33m\t$1\033[1;35m\n"; sleep 1
 }
 
-# welcome
-log "\033[1;31mAMD\033[1;33m Navi Caddy Menu\n\n"
-
-
-
-
 # for every corresponding setup index there is a reference url at same index 
 declare setups=(
     "Navi 12 GLXLB [BC-160]"
@@ -23,7 +17,10 @@ declare reference=(
 
 
 # selection
-if [[ -z $1 ]];then
+if [[ -z $1 ]];
+
+    # welcome
+    log "\033[1;31mAMD\033[1;33m Navi Caddy Menu\n\n"
 
     # display setup options
     log "ID\tGPU Setup\n\t------------------------------------"
