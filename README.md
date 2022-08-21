@@ -10,7 +10,7 @@
 To start the setup open a terminal and download-open the install menu
 
 ```bash
-cd ~ && get https://b0-b.github.io/AMD-NAVI-1x-SETUP/setup.sh && bash setup.sh
+cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/setup.sh && bash setup.sh
 ```
 
 the menu will pop up, select an ID and hit ENTER
@@ -26,7 +26,7 @@ the menu will pop up, select an ID and hit ENTER
         ------------------------------------
         Please select a setup id from above: 1
         selected setup: Navi 10 XTB [TDC-120]
-        download https://b0-b.github.io/AMD-NAVI-1x-SETUP/lib/navi_10_xtb.sh and install ...
+        download https://b0-b.github.io/AMD-NAVI-CADDY/lib/navi_10_xtb.sh and install ...
 ```
 
 the installation will start accordingly.
@@ -34,7 +34,7 @@ the installation will start accordingly.
 Once the ID is known (will persist) the install can be triggered directly by passing the ID as line argument
 
 ```bash
-cd ~ && get https://b0-b.github.io/AMD-NAVI-1x-SETUP/setup.sh && bash setup.sh <id>
+cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/setup.sh && bash setup.sh <id>
 ```
 
 
