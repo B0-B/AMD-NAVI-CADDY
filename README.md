@@ -1,39 +1,77 @@
-<h1 align=center><strong>AMD</strong> NAVI 1x MULTI GPU SETUP [LINUX]</h2>
+<h1 align=center><strong>AMD</strong> NAVI CADDY 
+<h3 align=center>GPU MINING SETUP LIBRARY [LINUX]</h3>
 
-# Prerequisites
-Ubuntu 20.04.2 (Desktop LTS) and no updates (apt-get update) [TESTED]
-Ubuntu 18.04 [NOT TESTED]
+<br>
 
-# Dependencies
-- AMD 20.40 Driver
-- Team Red Miner 0.8.5
-- no-dkms
 
-# Download
-Open a terminal anywhere and type
-```bash
-~$ wget -O - https://b0-b.github.io/AMD-NAVI-1x-SETUP/pull.sh | bash 
-```
-and hit enter. The `setup.sh` and `uninstall.sh` will be downloaded in the home directory.
 
-# Setup
+# Usage
 
-### 1. Run setup
-Go into your home directory and run the setup
-```bash
-~$ cd $HOME
-~$ /bin/bash setup.sh
-```
-The script will ask for a password at the beginning and for a reboot when finished.
-Please reboot your system.
-
-### 2. Override Parameters
-Go into the generated overdrive.sh script in the miner directory 
+To start the setup open a terminal and download-open the install menu
 
 ```bash
-cd $HOME/miner/teamredminer-v0.8.5-linux/
+cd ~ && get https://b0-b.github.io/AMD-NAVI-1x-SETUP/setup.sh && bash setup.sh
 ```
 
+the menu will pop up, select an ID and hit ENTER
+
+```bash
+        AMD Navi Caddy Menu
+
+
+        ID      GPU Setup
+        ------------------------------------
+        0       Navi 12 GLXLB [BC-160]
+        1       Navi 10 XTB [TDC-120]
+        ------------------------------------
+        Please select a setup id from above: 1
+        selected setup: Navi 10 XTB [TDC-120]
+        download https://b0-b.github.io/AMD-NAVI-1x-SETUP/lib/navi_10_xtb.sh and install ...
+```
+
+the installation will start accordingly.
+
+Once the ID is known (will persist) the install can be triggered directly by passing the ID as line argument
+
+```bash
+cd ~ && get https://b0-b.github.io/AMD-NAVI-1x-SETUP/setup.sh && bash setup.sh <id>
+```
+
+
+
+
+<br>
+
+# Recommended Kernel & OS Prerequisites
+| GPU Setup | Kernel | OS |
+|---|---|---|
+| Navi 10 XTB | 5.15 or earlier | Ubuntu 20.04.3 |
+| Navi 12 (BC-160) |  5.11.27 or earlier | Ubuntu 20.04.2 |
+
+It is important to mention <strong>not</strong> to upgrade the Kernel by `sudo apt upgrade`.
+
+<br>
+
+
+# Modify Overdrive Script
+
+After any install the `overdrive.sh` will be generated in `~/miner/teamredminer-.../overdrive.sh` which serves as the start script.
+
+## 1. Set Wallet and Worker
+
+Edit the following lines 
+
+```bash
+...
+declare wallet="YOUR WALLET ADDRESS HERE"
+declare workername="YOUR WORKER NAME HERE"
+...
+```
+
+and save with CTRL + x.
+
+## 2. Overdrive Capability
+Some setups utilize overdrive capability to get higher hash rates. 
 When multiple GPUs are utilized on a single mainboard (MB), the MB dependend PCI IDs need to be determined to set MCLK and GFX voltages clocks correctly and allow maximum memory allocation (before mining workload).
 To find these use the `card_from_pci.sh` script in the same directory, by trying HEX numbers starting from 0.
 ```bash
