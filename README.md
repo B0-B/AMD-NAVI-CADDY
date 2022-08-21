@@ -3,7 +3,7 @@
 
 <br>
 
-The quickest way to get a suiting driver and highest efficient miner [teamredminer](https://github.com/todxx/teamredminer) auto-installed with most optimal hashing configuration on any Navi, installed quick & easy via a console setup manager.
+The quickest way to get a suiting driver and highest efficient miner [teamredminer](https://github.com/todxx/teamredminer) auto-installed with most optimal hashing configuration on any Navi, installed quick & easy via a console manager.
 
 
 # Usage
@@ -11,7 +11,7 @@ The quickest way to get a suiting driver and highest efficient miner [teamredmin
 To start the setup open a terminal and download-open the install menu
 
 ```bash
-cd ~ && wget https://b0-b.github.io/AMD-NAVI-CADDY/setup.sh && bash setup.sh
+cd ~ && wget https://b0-b.github.io/AMD-NAVI-CADDY/caddy.sh && bash setup.sh
 ```
 
 the menu will pop up, select an ID and hit ENTER
@@ -35,7 +35,7 @@ the installation will start accordingly.
 Once the ID is known (will persist) the install can be triggered directly by passing the ID as line argument
 
 ```bash
-cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/setup.sh && bash setup.sh <id>
+cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/caddy.sh && bash setup.sh <id>
 ```
 
 
