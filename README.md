@@ -3,6 +3,7 @@
 
 <br>
 
+The quickest way to get a suiting driver and highest efficient miner [teamredminer](https://github.com/todxx/teamredminer) auto-installed with most optimal hashing configuration on any Navi, installed quick & easy via a console setup manager.
 
 
 # Usage
