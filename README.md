@@ -11,7 +11,7 @@ The quickest way to get a suiting driver and highest efficient miner [teamredmin
 To start the setup open a terminal and download-open the install menu
 
 ```bash
-cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/setup.sh && bash setup.sh
+cd ~ && wget https://b0-b.github.io/AMD-NAVI-CADDY/setup.sh && bash setup.sh
 ```
 
 the menu will pop up, select an ID and hit ENTER
