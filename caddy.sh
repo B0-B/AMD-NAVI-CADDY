@@ -9,10 +9,12 @@ function log () {
 declare setups=(
     "Navi 12 GLXLB [BC-160]"
     "Navi 10 XTB [TDC-120]"
+    "Navi 14 XTB [TDC-160]"
 )
 declare reference=(
     "navi_12_bc-160.sh"
     "navi_10_xtb.sh"
+    "navi_14_xtb.sh"
 )
 
 

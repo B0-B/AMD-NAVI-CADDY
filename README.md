@@ -44,10 +44,11 @@ cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/caddy.sh && bash caddy.sh <id>
 <br>
 
 # Recommended Kernel & OS Prerequisites
-| GPU Setup | Kernel | OS |
-|---|---|---|
-| Navi 10 XTB | 5.15 or earlier | Ubuntu 20.04.3 |
-| Navi 12 (BC-160) |  5.11.27 or earlier | Ubuntu 20.04.2 |
+| id | GPU Setup | Kernel | OS |
+|---|---|---|---|
+| 0 | Navi 12 (BC-160) |  5.11.27 or earlier | Ubuntu 20.04.2 |
+| 1 | Navi 10 XTB | 5.15 or earlier | Ubuntu 20.04.3 |
+| 2 | Navi 14 XTB (Gemini) | 5.13.0-30 or earlier | Ubuntu 20.04.3 |
 
 It is important to mention <strong>not</strong> to upgrade the Kernel by `sudo apt upgrade`.
 
