@@ -71,7 +71,14 @@ if [ -z $1 ]; then
     /usr/bin/amdgpu-install -y --opencl=rocr,legacy --accept-eula &&
     log "Successful.\n"
 
-    # user gorup rights
+    # set grub option
+    grubPath=/etc/default/grub # environment path for grub
+    log "Set default parameters in $grubPath ..." &&
+    sudo sed -i '10s/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff amdgpu.runpm=0 amdgpu.vm_block_size=11 amdgpu.vm_size=2048"/' $grubPath &&
+    sudo update-grub # final reboot at the end of script
+    log "Successful.\n"
+
+    # user group rights
     log "Set user group rights ..."
     sudo usermod -a -G video $usr &&
     sudo usermod -a -G render $usr &&
@@ -90,7 +97,41 @@ if [ -z $1 ]; then
     # inject overdrive.sh
     log "Build 'overdrive.sh' in '$minerpath' ..."
     cd "$minerpath/teamredminer-v$trm_version-linux" &&
-    echo `declare wallet="YOUR WALLET ADDRESS HERE"\ndeclare workername="YOUR WORKER NAME HERE"\n./teamredminer -a $algo -o $pool -u $wallet.$workername -p x --eth_config=B` >> overdrive.sh &&
+    #echo `declare wallet="YOUR WALLET ADDRESS HERE"\ndeclare workername="YOUR WORKER NAME HERE"\n./teamredminer -a $algo -o $pool -u $wallet.$workername -p x --eth_config=B` >> overdrive.sh &&
+    echo '#!/bin/bash
+declare wallet="YOUR WALLET ADDRESS HERE"
+declare workername="YOUR WORKER NAME HERE"
+declare algo="ethash"
+declare fan_percentage=50
+
+export GPU_MAX_ALLOC_PERCENT=100
+export GPU_SINGLE_ALLOC_PERCENT=100
+export GPU_MAX_HEAP_SIZE=100
+export GPU_USE_SYNC_OBJECTS=1
+export HSA_CU_MASK_SKIP_INIT=1
+
+# optimized clock settings
+p_state=2
+SCLK=960
+MCLK=960
+VDDC=700
+
+# Method to set GFX core, memory clock and VDDC
+function set_clocks () {
+        echo "manual" > /sys/class/drm/card$1/device/power_dpm_force_performance_level
+        echo "s 1 $SCLK" > /sys/class/drm/card$1/device/pp_od_clk_voltage
+        echo "m 1 $MCLK" > /sys/class/drm/card$1/device/pp_od_clk_voltage
+        echo "vc $p_state $SCLK $VDDC" > /sys/class/drm/card$1/device/pp_od_clk_voltage
+        echo "c" > /sys/class/drm/card$1/device/pp_od_clk_voltage
+        cat /sys/class/drm/card$1/device/pp_od_clk_voltage
+}
+
+# apply defined clocks to all adapter IDs
+set_clocks 0
+# set_clocks 1
+
+# init miner
+./teamredminer -a $algo -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workername -p x --eth_config=R --fan_control=$fan_percentage' >> $minerpath/overdrive.sh &&
     sudo chmod +x overdrive.sh && # make it executable
     log "Successful.\n"
 

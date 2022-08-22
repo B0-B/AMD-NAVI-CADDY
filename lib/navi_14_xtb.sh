@@ -71,7 +71,14 @@ if [ -z $1 ]; then
     /usr/bin/amdgpu-install -y --opencl=rocr,legacy --accept-eula &&
     log "Successful.\n"
 
-    # user gorup rights
+    # set grub option
+    grubPath=/etc/default/grub # environment path for grub
+    log "Set default parameters in $grubPath ..." &&
+    sudo sed -i '10s/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amdgpu.ppfeaturemask=0xffffffff amdgpu.runpm=0 amdgpu.vm_block_size=11 amdgpu.vm_size=2048"/' $grubPath &&
+    sudo update-grub # final reboot at the end of script
+    log "Successful.\n"
+
+    # user group rights
     log "Set user group rights ..."
     sudo usermod -a -G video $usr &&
     sudo usermod -a -G render $usr &&
