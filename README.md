@@ -50,7 +50,7 @@ cd ~ && get https://b0-b.github.io/AMD-NAVI-CADDY/caddy.sh && bash caddy.sh <id>
 | 1 | Navi 10 XTB | 5.15 or earlier | Ubuntu 20.04.3 |
 | 2 | Navi 14 XTB (Gemini) | 5.13.0-30 or earlier | Ubuntu 20.04.3 |
 
-It is important to mention <strong>not</strong> to upgrade the Kernel by `sudo apt upgrade`.
+It is important to mention <strong>not</strong> to upgrade the Kernel by `sudo apt upgrade`. To circumvent a kernel upgrade unplug the ethernet cable during the Ubuntu installation.
 
 <br>
 
