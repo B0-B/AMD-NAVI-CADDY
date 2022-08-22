@@ -34,12 +34,12 @@ if [[ -z $1 ]];then
     done
     log "------------------------------------"
 
-    printf "Please select a setup id from above: "
+    printf "\nPlease select a setup id from above: "
     read selection
 else
     selection=$1
 fi
-log "selected setup: ${setups[$selection]}"
+log "selected setup: ${setups[$selection]}\n"
 declare url="https://b0-b.github.io/AMD-NAVI-CADDY/lib/${reference[$selection]}"
 
 # download the setup to home directory and start setup
