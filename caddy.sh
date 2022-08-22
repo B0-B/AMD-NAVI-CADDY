@@ -8,8 +8,8 @@ function log () {
 # for every corresponding setup index there is a reference url at same index 
 declare setups=(
     "Navi 12 GLXLB [BC-160]"
-    "Navi 10 XTB [TDC-120]"
-    "Navi 14 XTB [TDC-160]"
+    "Navi 10 XTB [TDC-150]"
+    "Navi 14 XTB [TDC-120]"
 )
 declare reference=(
     "navi_12_bc-160.sh"
@@ -34,7 +34,7 @@ if [[ -z $1 ]];then
     done
     log "------------------------------------"
 
-    printf "\nPlease select a setup id from above: "
+    printf "\n\tPlease select a setup id from above: "
     read selection
 else
     selection=$1

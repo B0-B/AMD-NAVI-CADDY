@@ -17,17 +17,21 @@ cd ~ && wget https://b0-b.github.io/AMD-NAVI-CADDY/caddy.sh && bash caddy.sh
 the menu will pop up, select an ID and hit ENTER
 
 ```bash
+$ bash caddy.sh 
         AMD Navi Caddy Menu
 
 
         ID      GPU Setup
         ------------------------------------
         0       Navi 12 GLXLB [BC-160]
-        1       Navi 10 XTB [TDC-120]
+        1       Navi 10 XTB [TDC-150]
+        2       Navi 14 XTB [TDC-120]
         ------------------------------------
-        Please select a setup id from above: 1
-        selected setup: Navi 10 XTB [TDC-120]
-        download https://b0-b.github.io/AMD-NAVI-CADDY/lib/navi_10_xtb.sh and install ...
+
+        Please select a setup id from above: 0
+        selected setup: Navi 12 GLXLB [BC-160]
+
+        download https://b0-b.github.io/AMD-NAVI-CADDY/lib/navi_12_bc-160.sh and install ...
 ```
 
 the installation will start accordingly.
