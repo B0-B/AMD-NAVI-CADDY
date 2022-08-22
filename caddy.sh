@@ -19,7 +19,7 @@ declare reference=(
 
 
 # selection
-if [[ -z $1 ]];
+if [[ -z $1 ]];then
 
     # welcome
     log "\033[1;31mAMD\033[1;33m Navi Caddy Menu\n\n"
