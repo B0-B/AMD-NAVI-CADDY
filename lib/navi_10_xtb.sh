@@ -112,7 +112,7 @@ export HSA_CU_MASK_SKIP_INIT=1
 
 # optimized clock settings
 p_state=2
-SCLK=960
+SCLK=1160
 MCLK=960
 VDDC=700
 
@@ -131,8 +131,8 @@ set_clocks 0
 # set_clocks 1
 
 # init miner
-./teamredminer -a $algo -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workername -p x --eth_config=R --fan_control=$fan_percentage' >> $minerpath/overdrive.sh &&
-    sudo chmod +x overdrive.sh && # make it executable
+./teamredminer -a $algo -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workername -p x --eth_config=R --fan_control=$fan_percentage' >> "$minerpath/teamredminer-v$trm_version-linux/overdrive.sh" &&
+    sudo chmod +x "$minerpath/teamredminer-v$trm_version-linux/overdrive.sh" && # make it executable
     log "Successful.\n"
 
 elif [ $1 == 'uninstall' ]; then
