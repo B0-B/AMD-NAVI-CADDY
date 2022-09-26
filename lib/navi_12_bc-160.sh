@@ -116,7 +116,7 @@ cat /sys/class/drm/card$C/device/pp_od_clk_voltage
 }
 gpu "03" & gpu "06" & gpu "09" & gpu "0c" & gpu "0f" & gpu "13" & gpu "16" & gpu "19" & gpu "1c" & gpu "1f" & gpu "22" & gpu "25" &&
 wait
-./teamredminer -a ethash -o stratum+tcp://eu1.ethermine.org:4444 -u $wallet.$workerName -p x --eth_config=B' >> $dir/miner/teamredminer-v0.8.5-linux/overdrive.sh &&
+./teamredminer -a $algo -o stratum+tcp://ethw.2miners.com:2020 -u $wallet.$workername -p x --eth_config=B' >> $dir/miner/teamredminer-v0.8.5-linux/overdrive.sh &&
 highlight "Inject $dir/miner/teamredminer-v0.8.5-linux/card_from_pci.sh ..."
 echo '#!/bin/bash
 cd `dirname $0`

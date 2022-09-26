@@ -5,6 +5,11 @@
 
 The quickest way to get a suiting driver and highest efficient miner [teamredminer](https://github.com/todxx/teamredminer) auto-installed with most optimal hashing configuration on any Navi, installed quick & easy via a console manager.
 
+# Updates
+| Date | Description |
+|---|---|
+| 26/09/2022 | Added [Ethereum-PoW](https://coinmarketcap.com/currencies/ethereum-pow/) as default algorithm and exchanged the pool to [2miners](https://ethw.2miners.com) |
+
 
 # Usage
 
