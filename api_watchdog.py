@@ -3,17 +3,17 @@
 # ---- parameters ----
 worker_name = "rig"
 miner_path = "~/miner/teamredminer-v0.10.5.1-linux"
-period_in_minutes = 1
+period_in_minutes = 5
 wallets = {
-    "EthereumPoW": "None",
-    "EthereumClassic": "None",
-    "Ergo": "None",
-    "Vertcoin": "None",
-    "Ravencoin": "None",
-    "Grin-CT32": "None",
-    "Ubiq": "None",
-    "Kaspa": "None",
-    "Firo": "None"
+    "EthereumPoW": "0x4bF616b37fFD9bFEe3323D2a1B162732B8499FDE",
+    "EthereumClassic": None,
+    "Ergo": None,
+    "Vertcoin": None,
+    "Ravencoin": None,
+    "Grin-CT32": None,
+    "Ubiq": None,
+    "Kaspa": None,
+    "Firo": None
 }
 # --------------------
 
@@ -24,7 +24,9 @@ from time import sleep
 from multiprocessing import Process
 from signal import SIGTERM
 from datetime import datetime
+from traceback import format_exc
 import psutil
+
 
 class watchdog:
 
@@ -93,8 +95,6 @@ class watchdog:
                 "p": "",
             }
         }
-        
-        #self.crawl_whattomine()
 
     def build_start_command (self):
 
@@ -159,7 +159,7 @@ class watchdog:
                 if best_algo != self.algo:
                     # if there was an algo selected before, terminate
                     if self.algo is not None:
-                        self.log(f'found a better algorithm: {best_algo}', col='y')
+                        self.log(f'switch to more profitable algorithm: {best_algo}', col='y')
                         self.stop_workload_thread()
                     # overrride and restart
                     self.algo = best_algo
@@ -176,6 +176,11 @@ class watchdog:
                 self.log('terminating.', col='y')
                 self.stop_workload_thread()
                 break
+
+            except:
+
+                self.log(format_exc(), col='r')
+
                 
     def start_workload_thread (self):
 
@@ -209,9 +214,7 @@ class watchdog:
         cmd = self.start_cmd
         #cmd = f"python3 {self.path}/test.py" # for test purposes
         system(cmd)
-
-    
-    
+ 
 if __name__ == '__main__':   
 
     w = watchdog(wallets, miner_path)
