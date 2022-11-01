@@ -31,9 +31,8 @@ import psutil
 class watchdog:
 
     '''
-    A simple watchdog which repeatedly evaluates the most profitable algorithm
-    for teamredminer and (re-)starts automatic threads with the newly picked algo. 
-    The profit information is derived from whattomine.com
+    A simple watchdog which repeatedly evaluates the most profitable PoW algorithm for teamredminer
+    via whattomine.com json rest-API and (re-)starts automatic threads with the newly picked algorithm. 
     '''
 
     def __init__(self,  wallets, miner_path) -> None:
@@ -146,7 +145,7 @@ class watchdog:
         '''
 
         self.log('start teamredminer ...', col='y')
-        
+
         while (True):
 
             try:
