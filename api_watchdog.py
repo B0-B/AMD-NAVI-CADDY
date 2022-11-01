@@ -145,7 +145,8 @@ class watchdog:
         Main operation loop.
         '''
 
-        self.log('start team redminer ...', col='y')
+        self.log('start teamredminer ...', col='y')
+        
         while (True):
 
             try:
