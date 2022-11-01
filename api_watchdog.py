@@ -118,7 +118,7 @@ class watchdog:
         self.stats = get('https://whattomine.com/coins.json').json()['coins']
         return self.stats
 
-    def log (self, *out, col="red"):
+    def log (self, *out, col=""):
         if col == 'r':
             col = '\033[91m'
         elif col == 'b':
@@ -132,6 +132,11 @@ class watchdog:
         print(f'{col}[{datetime.now().utcnow()}]\t'+'\t'.join(out)+'\033[0m')
 
     def select_most_profitable_algo (self):
+        
+        '''
+        Selects the most profitable algorithm (for which a wallet is declared)
+        from crawl_whattomine return called in advance.
+        '''
 
         if self.stats:
             for algo in self.stats:
